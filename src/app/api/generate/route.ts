@@ -4,7 +4,7 @@ import { pool } from "../../../lib/db";
 export async function GET() {
   try {
     const result = await pool.query(
-      "SELECT * FROM campaigns ORDER BY created_at DESC"
+      "SELECT * FROM unique_codes ORDER BY created_at DESC"
     );
     return NextResponse.json({ data: result.rows }, { status: 200 });
   } catch (error) {

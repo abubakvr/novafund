@@ -10,3 +10,6 @@ content-type: application/json
     "codeAmount": 100,
     "maxCodes": 500
 }
+###
+
+GET http://localhost:3000/api/generate
