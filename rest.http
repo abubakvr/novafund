@@ -1,0 +1,12 @@
+
+POST http://localhost:3000/api/generate
+content-type: application/json
+
+{
+    "name": "Christmas Fundraiser 2024",
+    "startDate": "2024-12-01T00:00:00Z",
+    "endDate": "2024-12-25T23:59:59Z",
+    "targetAmount": 50000,
+    "codeAmount": 100,
+    "maxCodes": 500
+}
