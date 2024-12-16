@@ -1,6 +1,8 @@
 import { pool } from "@/lib/db";
-import { formatDate } from "@/lib/helpers";
+import { format } from "date-fns";
 import Link from "next/link";
+
+export const dynamic = "force-dynamic";
 
 async function getCampaigns() {
   "use server";
@@ -105,9 +107,9 @@ export default async function CampaignsPage() {
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600">Duration</span>
                   <span className="font-medium">
-                    {formatDate(campaign.start_date)} -{" "}
+                    {format(new Date(campaign.start_date), "MMM d, yyyy")} -{" "}
                     {campaign.end_date
-                      ? formatDate(campaign.end_date)
+                      ? format(new Date(campaign.end_date), "MMM d, yyyy")
                       : "Ongoing"}
                   </span>
                 </div>

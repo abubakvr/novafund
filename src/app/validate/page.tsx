@@ -57,7 +57,10 @@ export default function ValidateCode() {
   return (
     <div className="max-w-md mx-auto p-6">
       <button
-        onClick={() => router.back()}
+        onClick={() => {
+          router.push("/"); // Redirect to campaigns list
+          router.refresh();
+        }}
         className="text-blue-600 hover:text-blue-900 mb-4"
       >
         <svg

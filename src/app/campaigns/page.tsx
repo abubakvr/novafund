@@ -2,6 +2,8 @@ import { pool } from "@/lib/db";
 import { format } from "date-fns";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 async function getCampaigns() {
   "use server";
 
