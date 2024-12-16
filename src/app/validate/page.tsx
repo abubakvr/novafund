@@ -1,12 +1,23 @@
 "use client";
 
+import { formatDate } from "@/lib/helpers";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+
+interface ValidationResult {
+  success: boolean;
+  data?: {
+    campaign_name: string;
+    amount: number;
+    validated_at: string;
+  };
+  error?: string;
+}
 
 export default function ValidateCode() {
   const router = useRouter();
   const [code, setCode] = useState("");
-  const [result, setResult] = useState<any>(null);
+  const [result, setResult] = useState<ValidationResult | null>(null);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -47,20 +58,20 @@ export default function ValidateCode() {
     <div className="max-w-md mx-auto p-6">
       <button
         onClick={() => router.back()}
-        className="mb-4 flex items-center text-blue-600"
+        className="text-blue-600 hover:text-blue-900 mb-4"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 mr-2"
           fill="none"
           viewBox="0 0 24 24"
+          strokeWidth={1.5}
           stroke="currentColor"
+          className="w-6 h-6 inline-block"
         >
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeWidth={2}
-            d="M10 19l-7-7m0 0l7-7m-7 7h18"
+            d="M15.75 19.5L8.25 12l7.5-7.5"
           />
         </svg>
         Back
@@ -90,9 +101,8 @@ export default function ValidateCode() {
         <button
           type="submit"
           disabled={loading}
-          className={`w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 ${
-            loading ? "opacity-50 cursor-not-allowed" : ""
-          }`}
+          className={`w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 
+            ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
         >
           {loading ? "Validating..." : "Validate Code"}
         </button>
@@ -110,12 +120,11 @@ export default function ValidateCode() {
             <div>
               <h3 className="text-green-800 font-medium">Code Validated!</h3>
               <p className="text-sm text-green-700 mt-1">
-                Campaign: {result.data.campaign_name}
+                Campaign: {result.data?.campaign_name}
                 <br />
-                Amount: ${result.data.amount.toLocaleString()}
+                Amount: ${result.data?.amount.toLocaleString()}
                 <br />
-                Validated at:{" "}
-                {new Date(result.data.validated_at).toLocaleString()}
+                Validated at: {formatDate(result.data!.validated_at)}
               </p>
             </div>
           ) : (
