@@ -30,10 +30,25 @@ export default function CodesTable({
   const searchParams = useSearchParams();
   const [copied, setCopied] = useState<string | null>(null);
 
+  const formatDate = (dateString: string | null) => {
+    if (!dateString) return "-";
+    const date = new Date(dateString);
+
+    // Use UTC methods to ensure consistent output
+    const year = date.getUTCFullYear();
+    const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+    const day = String(date.getUTCDate()).padStart(2, "0");
+    const hours = String(date.getUTCHours()).padStart(2, "0");
+    const minutes = String(date.getUTCMinutes()).padStart(2, "0");
+    const seconds = String(date.getUTCSeconds()).padStart(2, "0");
+
+    return `${month}/${day}/${year}, ${hours}:${minutes}:${seconds} UTC`;
+  };
+
   const handlePageChange = (page: number) => {
     const params = new URLSearchParams(searchParams);
     params.set("page", page.toString());
-    router.push(`/campaigns/${campaignId}/codes?${params.toString()}`);
+    router.push(`/campaigns/${campaignId}?${params.toString()}`);
   };
 
   const handleFilterChange = (filter: string) => {
@@ -44,7 +59,7 @@ export default function CodesTable({
       params.delete("filter");
     }
     params.delete("page"); // Reset to first page
-    router.push(`/campaigns/${campaignId}/codes?${params.toString()}`);
+    router.push(`/campaigns/${campaignId}?${params.toString()}`);
   };
 
   const copyToClipboard = async (code: string) => {
@@ -136,12 +151,10 @@ export default function CodesTable({
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {code.used_at
-                      ? new Date(code.used_at).toLocaleString()
-                      : "-"}
+                    {code.used_at ? formatDate(code.used_at) : "-"}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {new Date(code.created_at).toLocaleString()}
+                    {formatDate(code.created_at)}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <button

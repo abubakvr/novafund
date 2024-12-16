@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function ValidateCode() {
+  const router = useRouter();
   const [code, setCode] = useState("");
   const [result, setResult] = useState<any>(null);
   const [loading, setLoading] = useState(false);
@@ -43,6 +45,26 @@ export default function ValidateCode() {
 
   return (
     <div className="max-w-md mx-auto p-6">
+      <button
+        onClick={() => router.back()}
+        className="mb-4 flex items-center text-blue-600"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6 mr-2"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"
+          />
+        </svg>
+        Back
+      </button>
       <h1 className="text-2xl font-bold mb-6">Validate Code</h1>
 
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -68,8 +90,9 @@ export default function ValidateCode() {
         <button
           type="submit"
           disabled={loading}
-          className={`w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 
-            ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+          className={`w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 ${
+            loading ? "opacity-50 cursor-not-allowed" : ""
+          }`}
         >
           {loading ? "Validating..." : "Validate Code"}
         </button>
