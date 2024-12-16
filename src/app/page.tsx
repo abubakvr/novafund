@@ -28,15 +28,23 @@ export default async function CampaignsPage() {
   const campaigns = await getCampaigns();
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-5">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Fundraising Campaigns</h1>
-        <Link
-          href="/campaigns/new"
-          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
-        >
-          Create Campaign
-        </Link>
+        <div className="space-x-3 ">
+          <Link
+            href="/validate"
+            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+          >
+            Validate
+          </Link>
+          <Link
+            href="/createcampaign"
+            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+          >
+            Create Campaign
+          </Link>
+        </div>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

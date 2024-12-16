@@ -37,7 +37,7 @@ export default function NewCampaign() {
         throw new Error(errorData.error || "Failed to create campaign");
       }
 
-      router.push("/campaigns"); // Redirect to campaigns list
+      router.push("/"); // Redirect to campaigns list
       router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
