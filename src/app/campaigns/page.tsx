@@ -30,38 +30,40 @@ export default async function CampaignsPage() {
   const campaigns = await getCampaigns();
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-5">
+    <div className="mx-auto px-4 mt-5">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Fundraising Campaigns</h1>
-        <div className="space-x-3 ">
+        <h1 className="text-lg font-bold md:text-2xl">Fundraising Campaigns</h1>
+        <div className="space-x-1 md:space-x-3">
           <Link
             href="/validate"
-            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+            className="bg-blue-600 text-white px-3 py-2 rounded-md hover:bg-blue-700 text-sm md:px-4 md:py-2 md:text-base"
           >
             Validate
           </Link>
           <Link
             href="/createcampaign"
-            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+            className="bg-blue-600 text-white px-3 py-2 rounded-md hover:bg-blue-700 text-sm md:px-4 md:py-2 md:text-base"
           >
-            Create Campaign
+            Create
           </Link>
         </div>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 md:gap-6 lg:gap-8 md:grid-cols-2 lg:grid-cols-3">
         {campaigns.map((campaign) => (
           <div
             key={campaign.id}
             className="bg-white rounded-lg shadow-md overflow-hidden"
           >
-            <div className="p-6">
-              <h2 className="text-xl font-semibold mb-2">{campaign.name}</h2>
+            <div className="p-4 md:p-6">
+              <h2 className="text-lg font-semibold mb-2 md:text-xl">
+                {campaign.name}
+              </h2>
 
               {/* Progress bar */}
-              <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+              <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
                 <div
-                  className="bg-blue-600 h-2.5 rounded-full transition-all duration-500"
+                  className="bg-blue-600 h-2 rounded-full transition-all duration-500"
                   style={{
                     width: `${Math.min(
                       (campaign.current_amount / campaign.target_amount) * 100,
@@ -72,7 +74,7 @@ export default async function CampaignsPage() {
               </div>
 
               <div className="space-y-2">
-                <div className="flex justify-between text-sm">
+                <div className="flex justify-between text-sm md:text-base">
                   <span className="text-gray-600">Progress</span>
                   <span className="font-medium">
                     {(
@@ -83,28 +85,28 @@ export default async function CampaignsPage() {
                   </span>
                 </div>
 
-                <div className="flex justify-between text-sm">
+                <div className="flex justify-between text-sm md:text-base">
                   <span className="text-gray-600">Raised</span>
                   <span className="font-medium">
                     ${Number(campaign.current_amount).toLocaleString()}
                   </span>
                 </div>
 
-                <div className="flex justify-between text-sm">
+                <div className="flex justify-between text-sm md:text-base">
                   <span className="text-gray-600">Target</span>
                   <span className="font-medium">
                     ${Number(campaign.target_amount).toLocaleString()}
                   </span>
                 </div>
 
-                <div className="flex justify-between text-sm">
+                <div className="flex justify-between text-sm md:text-base">
                   <span className="text-gray-600">Codes Used</span>
                   <span className="font-medium">
                     {campaign.used_codes} / {campaign.total_codes}
                   </span>
                 </div>
 
-                <div className="flex justify-between text-sm">
+                <div className="flex justify-between text-sm md:text-base">
                   <span className="text-gray-600">Duration</span>
                   <span className="font-medium">
                     {format(new Date(campaign.start_date), "MMM d, yyyy")} -{" "}
@@ -118,7 +120,7 @@ export default async function CampaignsPage() {
               <div className="mt-4 pt-4 border-t">
                 <Link
                   href={`/campaigns/${campaign.id}`}
-                  className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                  className="text-blue-600 hover:text-blue-800 text-sm font-medium md:text-base"
                 >
                   View Details →
                 </Link>
@@ -129,10 +131,10 @@ export default async function CampaignsPage() {
 
         {campaigns.length === 0 && (
           <div className="col-span-full text-center py-12">
-            <h3 className="text-lg font-medium text-gray-900">
+            <h3 className="text-lg font-medium text-gray-900 md:text-xl">
               No campaigns yet
             </h3>
-            <p className="mt-1 text-sm text-gray-500">
+            <p className="mt-1 text-sm text-gray-500 md:text-base">
               Get started by creating a new campaign.
             </p>
           </div>

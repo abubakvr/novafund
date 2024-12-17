@@ -72,12 +72,10 @@ async function getCampaignWithCodes(
   }
 }
 
-export default async function CampaignCodesPage(
-  props: {
-    params: Promise<{ id: string }>;
-    searchParams: Promise<{ page?: string; filter?: string }>;
-  }
-) {
+export default async function CampaignCodesPage(props: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ page?: string; filter?: string }>;
+}) {
   const searchParams = await props.searchParams;
   const params = await props.params;
   const page = Number(searchParams.page) || 1;

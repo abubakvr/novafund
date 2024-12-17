@@ -73,7 +73,7 @@ export default function NewCampaign() {
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <div>
             <label
               htmlFor="startDate"
@@ -106,7 +106,7 @@ export default function NewCampaign() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           <div>
             <label
               htmlFor="targetAmount"
@@ -171,8 +171,9 @@ export default function NewCampaign() {
           <button
             type="submit"
             disabled={loading}
-            className={`px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 
-              ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+            className={`px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 ${
+              loading ? "opacity-50 cursor-not-allowed" : ""
+            }`}
           >
             {loading ? "Creating..." : "Create Campaign"}
           </button>
